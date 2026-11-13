@@ -1,0 +1,242 @@
+.ga-pokemon-listing {
+  --ga-pokemon-card-skeleton: #dedbd7;
+  --ga-pokemon-card-skeleton-highlight: #ebe8e5;
+}
+
+.ga-pokemon-filters select[name="post_tag"],
+.ga-pokemon-filters select[name="capability"] {
+  display: none;
+}
+
+.ga-pokemon-empty-message {
+  padding: 36px;
+  margin: 32px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  background: #f1efed;
+  border-radius: 10px;
+}
+
+.ga-pokemon-listing .listing-box > :not(.ga-pokemon-card-shell) {
+  display: none;
+}
+
+.ga-pokemon-listing .listing-box[hidden] {
+  display: none;
+}
+
+.ga-pokemon-card {
+  min-width: 0;
+}
+
+.ga-pokemon-card-shell {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 390px;
+  perspective: 1200px;
+}
+
+.ga-pokemon-card-loading,
+.ga-pokemon-card-error {
+  gap: 24px;
+}
+
+.ga-pokemon-card-loaded {
+  cursor: pointer;
+}
+
+.ga-pokemon-card-loaded:focus-visible {
+  outline: 3px solid #324fbc;
+  outline-offset: 4px;
+}
+
+.ga-pokemon-card-flipper {
+  display: grid;
+  flex: 1 1 auto;
+  transform-style: preserve-3d;
+  transition: transform 450ms ease;
+}
+
+.ga-pokemon-card-flipped .ga-pokemon-card-flipper {
+  transform: rotateY(180deg);
+}
+
+.ga-pokemon-card-face {
+  display: flex;
+  grid-area: 1 / 1;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.ga-pokemon-card-back {
+  padding: 28px;
+  color: #ffffff;
+  background: #252220;
+  border-radius: 10px;
+  transform: rotateY(180deg);
+}
+
+.ga-pokemon-card-back .listing-box__title {
+  color: inherit;
+}
+
+.ga-pokemon-card-image-skeleton,
+.ga-pokemon-card-name-skeleton,
+.ga-pokemon-card-type-skeletons span {
+  background: linear-gradient(
+    90deg,
+    var(--ga-pokemon-card-skeleton) 25%,
+    var(--ga-pokemon-card-skeleton-highlight) 50%,
+    var(--ga-pokemon-card-skeleton) 75%
+  );
+  background-size: 200% 100%;
+  animation: ga-pokemon-skeleton-loading 1200ms linear infinite;
+}
+
+.ga-pokemon-card-image-skeleton {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.ga-pokemon-card-number {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ga-pokemon-card-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ga-pokemon-card-image {
+  height: 100%;
+  padding: 24px;
+  object-fit: contain;
+}
+
+.ga-pokemon-card-name {
+  text-transform: capitalize;
+}
+
+.ga-pokemon-card-types {
+  margin-top: auto;
+}
+
+.ga-pokemon-card-flip-hint {
+  align-self: flex-start;
+  padding-bottom: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 2px solid currentColor;
+}
+
+.ga-pokemon-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+}
+
+.ga-pokemon-card-details div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(255 255 255 / 35%);
+}
+
+.ga-pokemon-card-details dt {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ga-pokemon-card-details dd {
+  max-width: 60%;
+  margin: 0;
+  text-align: right;
+}
+
+.ga-pokemon-card-back .ga-pokemon-card-flip-hint {
+  margin-top: auto;
+}
+
+.ga-pokemon-card-error-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #55504c;
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.ga-pokemon-card-name-skeleton {
+  display: block;
+  width: 70%;
+  height: 28px;
+  border-radius: 5px;
+}
+
+.ga-pokemon-card-type-skeletons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ga-pokemon-card-type-skeletons li {
+  list-style: none;
+}
+
+.ga-pokemon-card-type-skeletons li span {
+  display: block;
+  width: 76px;
+  height: 30px;
+  border-radius: 999px;
+}
+
+.ga-pokemon-card-type-skeletons li:last-child span {
+  width: 58px;
+}
+
+.ga-pokemon-card-loading-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes ga-pokemon-skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .ga-pokemon-card-shell {
+    min-height: 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ga-pokemon-card-flipper,
+  .ga-pokemon-card-image-skeleton,
+  .ga-pokemon-card-name-skeleton,
+  .ga-pokemon-card-type-skeletons span {
+    animation: none;
+  }
+}

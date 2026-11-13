@@ -1,0 +1,145 @@
+@font-face {
+  font-family: "GA Jersey 15";
+  src: url("__GA_JERSEY_15_FONT_URL__") format("woff2");
+  font-display: block;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ga-questionnaire-cta {
+  --ga-button-bg: #5b813d;
+  --ga-button-highlight: #729e52;
+  --ga-button-shadow: #405e2b;
+  --ga-button-outline: #232323;
+  --ga-button-text: #ffffff;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background: #2c2828;
+}
+
+.ga-questionnaire-cta *,
+.ga-questionnaire-cta *::before,
+.ga-questionnaire-cta *::after {
+  box-sizing: border-box;
+}
+
+.ga-questionnaire-cta-content {
+  display: flex;
+  flex-direction: column;
+
+  width: min(100%, 1088px);
+}
+
+.ga-questionnaire-cta-heading {
+  max-width: 720px;
+  margin: 0 0 24px;
+  color: #ffffff;
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1;
+}
+
+.ga-questionnaire-cta-copy {
+  margin: 0 0 32px;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.5;
+  color: white;
+}
+
+.ga-questionnaire-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  clip-path: polygon(
+    4px 0,
+    calc(100% - 4px) 0,
+    calc(100% - 4px) 4px,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    4px calc(100% - 4px),
+    0 calc(100% - 4px),
+    0 4px,
+    4px 4px
+  );
+  background:
+    linear-gradient(
+      to bottom,
+      var(--ga-button-highlight) 0 4px,
+      transparent 4px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--ga-button-bg) 0 calc(100% - 4px),
+      var(--ga-button-shadow) calc(100% - 4px)
+    );
+  box-shadow:
+    inset 0 0 0 2px var(--ga-button-outline),
+    inset 6px 0 0 var(--ga-button-shadow),
+    inset -6px 0 0 var(--ga-button-shadow);
+  filter: drop-shadow(0 5px 0 #2c2828);
+  color: var(--ga-button-text);
+  cursor: pointer;
+  font-family: "GA Jersey 15", monospace;
+  font-size: 27px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 3px 0 var(--ga-button-shadow);
+  text-transform: uppercase;
+  transition:
+    filter 80ms linear,
+    transform 80ms linear;
+}
+
+.ga-questionnaire-cta-button:hover:not(:disabled) {
+  --ga-button-bg: #4b6d35;
+}
+
+.ga-questionnaire-cta-button:focus-visible {
+  --ga-button-bg: #4b6d35;
+  outline: none;
+  clip-path: none;
+  border: 1px solid white;
+  box-shadow: inset 0 0 0 2px #2850c3;
+}
+
+.ga-questionnaire-cta-button:active:not(:disabled) {
+  --ga-button-bg: #405e2b;
+  --ga-button-highlight: #405e2b;
+  --ga-button-shadow: #405e2b;
+
+  box-shadow: inset 0 0 0 2px var(--ga-button-outline);
+  filter: none;
+  text-shadow: none;
+  transform: translateY(5px);
+}
+
+.ga-questionnaire-cta-button:disabled {
+  --ga-button-bg: #e9e1e1;
+  --ga-button-highlight: #e9e1e1;
+  --ga-button-shadow: #e9e1e1;
+  --ga-button-outline: #a4a09c;
+  --ga-button-text: #a4a09c;
+
+  box-shadow: inset 0 0 0 2px var(--ga-button-outline);
+  filter: none;
+  cursor: not-allowed;
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ga-questionnaire-cta-button {
+    transition: none;
+  }
+}

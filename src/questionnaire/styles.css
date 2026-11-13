@@ -1,0 +1,12 @@
+html.ga-questionnaire-scroll-locked,
+body.ga-questionnaire-scroll-locked {
+  overflow: hidden !important;
+}
+
+body.ga-questionnaire-scroll-locked {
+  position: fixed !important;
+  top: var(--ga-questionnaire-scroll-offset) !important;
+  right: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+}

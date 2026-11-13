@@ -1,0 +1,121 @@
+.ga-questionnaire-progress {
+  --ga-progress-blue: #2850c3;
+  --ga-progress-green: #5b813d;
+  --ga-progress-border: #c9c7c4;
+  --ga-progress-text: #6b6865;
+  --ga-progress-background: #ffffff;
+
+  width: 100%;
+}
+
+.ga-questionnaire-progress-list {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ga-questionnaire-progress-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  color: var(--ga-progress-text);
+  text-align: center;
+}
+
+.ga-questionnaire-progress-step:not(:last-child)::after {
+  position: absolute;
+  z-index: 0;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 4px;
+  background: var(--ga-progress-border);
+  content: "";
+}
+
+.ga-questionnaire-progress-step-completed:not(:last-child)::after {
+  background: var(--ga-progress-blue);
+}
+
+.ga-questionnaire-progress-indicator {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--ga-progress-border);
+  border-radius: 50%;
+  background: var(--ga-progress-background);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ga-questionnaire-progress-step-active,
+.ga-questionnaire-progress-step-completed {
+  color: var(--ga-progress-blue);
+}
+
+.ga-questionnaire-progress-step-active {
+  font-weight: 700;
+}
+
+.ga-questionnaire-progress-step-active .ga-questionnaire-progress-indicator,
+.ga-questionnaire-progress-step-completed .ga-questionnaire-progress-indicator {
+  border-color: var(--ga-progress-blue);
+  background: var(--ga-progress-blue);
+  color: #ffffff;
+}
+
+.ga-questionnaire-progress-checkmark {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ga-progress-background);
+  border-radius: 50%;
+  background: var(--ga-progress-green);
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ga-questionnaire-progress-label {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .ga-questionnaire-progress-step {
+    gap: 6px;
+  }
+
+  .ga-questionnaire-progress-step:not(:last-child)::after {
+    top: 14px;
+  }
+
+  .ga-questionnaire-progress-indicator {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .ga-questionnaire-progress-label {
+    font-size: 11px;
+  }
+}
