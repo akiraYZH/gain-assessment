@@ -14,6 +14,8 @@ import styles from "./pokemon-listing.css";
 const LISTING_SELECTOR = '[data-behaviour="listing"]';
 const ARTICLE_CARD_SELECTOR = ".listing-box";
 const CARDS_PER_PAGE = 12;
+
+// Prevents stale API responses from rendering into a newer listing update.
 let renderVersion = 0;
 
 // Reads the React pagination state from the URL.
@@ -37,21 +39,24 @@ async function loadPokemonCard({
   listing,
   currentRenderVersion,
 }) {
+  let pokemon;
+
   try {
-    const pokemon = await getPokemon(pokemonId);
-
-    if (!isCardCurrent(card, pokemonId, currentRenderVersion)) return;
-
-    card.dataset.gaPokemonStatus = "loaded";
-    card.dataset.gaPokemonTypes = pokemon.types.join(" ");
-    renderPokemonCard(card, pokemon);
+    pokemon = await getPokemon(pokemonId);
   } catch {
     if (!isCardCurrent(card, pokemonId, currentRenderVersion)) return;
 
     card.dataset.gaPokemonStatus = "error";
     renderPokemonError(card, pokemonId);
+    applyPokemonTypeFilter(listing);
+    return;
   }
 
+  if (!isCardCurrent(card, pokemonId, currentRenderVersion)) return;
+
+  card.dataset.gaPokemonStatus = "loaded";
+  card.dataset.gaPokemonTypes = pokemon.types.join(" ");
+  renderPokemonCard(card, pokemon);
   applyPokemonTypeFilter(listing);
 }
 
@@ -93,9 +98,7 @@ export function createPokemonListing() {
     throw new Error("GAIN Blog listing was not found.");
   }
 
-  observeListingChanges(listing, () => handleListingUpdate(listing));
-
-  return [];
+  return observeListingChanges(listing, () => handleListingUpdate(listing));
 }
 
 export { styles };

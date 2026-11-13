@@ -1,3 +1,21 @@
+@property --ga-button-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5b813d;
+}
+
+@property --ga-button-highlight {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #729e52;
+}
+
+@property --ga-button-shadow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #405e2b;
+}
+
 @font-face {
   font-family: "GA Jersey 15";
   src: url("__GA_JERSEY_15_FONT_URL__") format("woff2");
@@ -98,6 +116,10 @@
   text-shadow: 0 3px 0 var(--ga-button-shadow);
   text-transform: uppercase;
   transition:
+    --ga-button-bg 140ms ease,
+    --ga-button-highlight 140ms ease,
+    --ga-button-shadow 140ms ease,
+    color 140ms ease,
     filter 80ms linear,
     transform 80ms linear;
 }

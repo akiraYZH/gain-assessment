@@ -21,11 +21,42 @@
   display: flex;
   align-items: center;
   flex: 1 1 0;
-  flex-direction: column;
-  gap: 8px;
   min-width: 0;
   color: var(--ga-progress-text);
   text-align: center;
+  transition: color 220ms ease-out;
+}
+
+.ga-questionnaire-progress-step-button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.ga-questionnaire-progress-step-button:disabled {
+  color: inherit;
+  cursor: default;
+  opacity: 1;
+}
+
+.ga-questionnaire-progress-step-button:focus-visible {
+  outline: 2px solid var(--ga-progress-blue);
+  outline-offset: 4px;
+}
+
+.ga-questionnaire-progress-step-completed
+  .ga-questionnaire-progress-step-button:hover
+  .ga-questionnaire-progress-label {
+  text-decoration: underline;
 }
 
 .ga-questionnaire-progress-step:not(:last-child)::after {
@@ -35,12 +66,19 @@
   left: 50%;
   width: 100%;
   height: 4px;
-  background: var(--ga-progress-border);
+  background:
+    linear-gradient(var(--ga-progress-blue), var(--ga-progress-blue)) left / 0%
+      100% no-repeat,
+    var(--ga-progress-border);
   content: "";
+  transition: background-size 260ms ease-out;
 }
 
 .ga-questionnaire-progress-step-completed:not(:last-child)::after {
-  background: var(--ga-progress-blue);
+  background:
+    linear-gradient(var(--ga-progress-blue), var(--ga-progress-blue)) left / 100%
+      100% no-repeat,
+    var(--ga-progress-border);
 }
 
 .ga-questionnaire-progress-indicator {
@@ -57,6 +95,10 @@
   font-size: 15px;
   font-weight: 700;
   line-height: 1;
+  transition:
+    border-color 220ms ease-out,
+    background-color 220ms ease-out,
+    color 220ms ease-out;
 }
 
 .ga-questionnaire-progress-step-active,
@@ -90,6 +132,17 @@
   color: #ffffff;
   font-size: 12px;
   line-height: 1;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 220ms ease-out,
+    transform 220ms ease-out;
+}
+
+.ga-questionnaire-progress-step-completed
+  .ga-questionnaire-progress-checkmark {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .ga-questionnaire-progress-label {
@@ -101,7 +154,7 @@
 }
 
 @media (max-width: 480px) {
-  .ga-questionnaire-progress-step {
+  .ga-questionnaire-progress-step-button {
     gap: 6px;
   }
 
@@ -117,5 +170,14 @@
 
   .ga-questionnaire-progress-label {
     font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ga-questionnaire-progress-step,
+  .ga-questionnaire-progress-step:not(:last-child)::after,
+  .ga-questionnaire-progress-indicator,
+  .ga-questionnaire-progress-checkmark {
+    transition: none;
   }
 }

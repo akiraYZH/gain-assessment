@@ -57,7 +57,7 @@ export function applyPokemonTypeFilter(listing) {
     const status = card.dataset.gaPokemonStatus;
     const pokemonTypes = (card.dataset.gaPokemonTypes ?? "").split(" ");
 
-    if (status !== "loaded") {
+    if (status === "loading") {
       pendingCardCount += 1;
     }
 
@@ -66,13 +66,12 @@ export function applyPokemonTypeFilter(listing) {
       (status === "loaded" && pokemonTypes.includes(selectedType));
 
     card.hidden = !matchesType;
+
     if (matchesType) visibleCardCount += 1;
   });
 
   const showEmptyMessage =
-    Boolean(selectedType) &&
-    pendingCardCount === 0 &&
-    visibleCardCount === 0;
+    Boolean(selectedType) && pendingCardCount === 0 && visibleCardCount === 0;
 
   emptyMessage.hidden = !showEmptyMessage;
   emptyMessage.textContent = showEmptyMessage
@@ -103,8 +102,7 @@ export function setupPokemonTypeFilter(listing) {
   typeFilter.innerHTML = `
     <option value="">Filter by type</option>
     ${POKEMON_TYPES.map(
-      (type) =>
-        `<option value="${type}">${formatPokemonLabel(type)}</option>`,
+      (type) => `<option value="${type}">${formatPokemonLabel(type)}</option>`,
     ).join("")}
   `;
   typeFilter.value = selectedType;
@@ -122,4 +120,3 @@ export function setupPokemonTypeFilter(listing) {
     filterDropdown.append(typeFilter);
   }
 }
-

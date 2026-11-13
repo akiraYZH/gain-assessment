@@ -29,6 +29,7 @@ The project builds a native JavaScript IIFE bundle that can be pasted directly i
 - `src/pokemon-listing/utils.js`: Text-formatting utilities shared within Task 3.
 - `src/pokemon-listing/observer.js`: Observes React listing replacements and schedules Task 3 updates.
 - `src/pokemon-listing/pokemon-listing.css`: Styles Pokémon cards, skeletons and responsive layouts.
+- `tests/smoke.test.mjs`: Runs browser smoke tests for all three tasks, filtering, pagination and repeated injection.
 - `dist/main.js`: The final bundle that can be pasted directly into the Console.
 - `dist/styles.css`: The complete stylesheet, available for separate injection into `<head>`.
 
@@ -40,7 +41,7 @@ npm run build
 npm run check
 ```
 
-`npm run check` confirms that the entry point builds successfully.
+`npm run check` builds both deliverables and runs the Playwright smoke tests in an installed Google Chrome browser.
 
 ## Development watch mode
 
@@ -52,7 +53,7 @@ This command watches the JavaScript and CSS files imported by the entry point un
 
 ## Injection
 
-Paste the complete contents of `dist/main.js` into the DevTools Console. The first run injects a `<style>` element with a fixed ID and sets `window.__GAIN_ASSESSMENT__`. Later runs detect this flag and exit without initializing the application again.
+Paste the complete contents of `dist/main.js` into the DevTools Console. The first run injects a `<style>` element with a fixed ID and sets `window.__GAIN_ASSESSMENT__`. Later runs detect this flag and exit without initializing the application again. The bundle can also run at `document-start`; it waits for the required page DOM before initializing.
 
 `dist/styles.css` contains the same complete stylesheet for separate injection into the page `<head>`. It is not required when using the default `dist/main.js` bundle because the bundle injects the CSS automatically.
 
@@ -116,4 +117,4 @@ Paste the complete contents of `dist/main.js` into the DevTools Console. The fir
 ### Bonus
 
 - [x] [Bonus] Animations where they improve the experience
-- [ ] [Bonus] Works when it runs before the page has finished loading
+- [x] [Bonus] Works when it runs before the page has finished loading

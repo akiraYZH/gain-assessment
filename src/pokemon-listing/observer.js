@@ -56,4 +56,12 @@ export function observeListingChanges(listing, onUpdate) {
     childList: true,
     subtree: true,
   });
+
+  return () => {
+    observer.disconnect();
+
+    if (updateRequest !== null) {
+      window.cancelAnimationFrame(updateRequest);
+    }
+  };
 }

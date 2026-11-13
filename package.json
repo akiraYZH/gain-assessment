@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "npm run build",
-    "dev": "node scripts/dev.mjs"
+    "check": "npm run build && npm run test:smoke",
+    "dev": "node scripts/dev.mjs",
+    "test:smoke": "node --test --test-concurrency=1 tests/smoke.test.mjs"
   },
   "devDependencies": {
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "playwright": "^1.65.0"
   }
 }

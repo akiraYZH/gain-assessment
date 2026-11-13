@@ -10,7 +10,7 @@ import {
 } from "../data.js";
 
 import { createQuestion } from "./question/index.js";
-import { createProgress } from "./progress/index.js";
+import { createProgress, updateProgress } from "./progress/index.js";
 import { createResults } from "./results/index.js";
 import { setPageScrollLocked } from "./scroll-lock.js";
 import { styles } from "./styles.js";
@@ -64,7 +64,7 @@ function renderQuestionStep({
 
   updateNextButton();
   content.replaceChildren(question);
-  modal.scrollTop = 0;
+  content.scrollTop = 0;
 
   if (state.currentStep === 0) {
     actions.replaceChildren(nextButton);
@@ -94,7 +94,7 @@ function renderResultsStep({
 
   content.replaceChildren(results);
   actions.replaceChildren(backButton);
-  modal.scrollTop = 0;
+  content.scrollTop = 0;
 }
 
 function renderCurrentStep({ modal, questions, resultsData, state }) {
@@ -107,12 +107,22 @@ function renderCurrentStep({ modal, questions, resultsData, state }) {
   }
 
   // progress bar
-  progress.replaceChildren(
-    createProgress({
-      steps: [...questions.map((question) => question.stepLabel), "Results"],
-      currentStep: state.currentStep,
-    }),
+  let progressNavigation = progress.querySelector(
+    ".ga-questionnaire-progress",
   );
+
+  if (!progressNavigation) {
+    progressNavigation = createProgress({
+      steps: [...questions.map((question) => question.stepLabel), "Results"],
+      onStepClick(stepIndex) {
+        state.currentStep = stepIndex;
+        renderCurrentStep({ modal, questions, resultsData, state });
+      },
+    });
+    progress.append(progressNavigation);
+  }
+
+  updateProgress(progressNavigation, state.currentStep);
 
   // back button
   const backButton = document.createElement("button");

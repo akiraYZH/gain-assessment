@@ -14,9 +14,12 @@
   background: var(--ga-modal-background);
   box-shadow: 8px 8px 0 rgb(0 0 0 / 30%);
   color: var(--ga-modal-text);
-  overflow: auto;
-  overscroll-behavior: contain;
-  touch-action: pan-y;
+  overflow: hidden;
+}
+
+.ga-questionnaire-modal[open] {
+  display: flex;
+  flex-direction: column;
 }
 
 .ga-questionnaire-modal::backdrop {
@@ -104,8 +107,22 @@
   padding: 24px;
 }
 
+.ga-questionnaire-modal-header,
+.ga-questionnaire-modal-progress,
+.ga-questionnaire-modal-actions {
+  flex: 0 0 auto;
+}
+
 .ga-questionnaire-modal-content {
-  min-height: 260px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+.ga-questionnaire-modal-content > * {
+  animation: ga-questionnaire-content-enter 180ms ease-out both;
 }
 
 .ga-questionnaire-modal-actions {
@@ -113,6 +130,18 @@
   justify-content: flex-end;
   gap: 16px;
   border-top: 2px solid var(--ga-modal-border);
+}
+
+@keyframes ga-questionnaire-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 480px) {
@@ -129,7 +158,10 @@
     padding: 16px;
   }
 
-  .ga-questionnaire-modal-content {
-    min-height: 220px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ga-questionnaire-modal-content > * {
+    animation: none;
   }
 }
